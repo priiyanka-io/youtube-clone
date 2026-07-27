@@ -154,14 +154,17 @@ const Navbar = () => {
           <div className="w-10 h-10 text-2xl cursor-pointer flex justify-center items-center rounded-full hover:bg-gray-100">
             <GoBell />
           </div>
-          <img className="dp w-10 h-10 rounded-full object-cover" src="/photo.png" />
+          <Link to="/profile">
+           <img className="dp w-10 h-10 rounded-full object-cover" src="/photo.png" /></Link>
+         
         </div>
       )}
 
       {!mobileSearchOpen && (
-        <div className="flex md:hidden shrink-0">
+        <Link to="/profile" className="flex md:hidden shrink-0">
+
           <img className="dp w-9 h-9 rounded-full object-cover" src="/photo.png" />
-        </div>
+        </Link>
       )}
     </div>
   );
