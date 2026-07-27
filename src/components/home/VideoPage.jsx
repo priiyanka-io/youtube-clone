@@ -3,11 +3,11 @@ import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import Recommended from "./Recommended";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { formatViews, timeAgo } from "../utils/timeAgo";
+import { formatViews, timeAgo } from "../../utils/timeAgo";
 import { useEffect } from "react";
-import VideoLoading from "./loading/VideoLoading";
-import { fetchChannel, fetchComments, fetchVideo } from "../Api/youtube";
-import ErrorPage from "./ErrorPage";
+import VideoLoading from "../loading/VideoLoading";
+import { fetchChannel, fetchComments, fetchVideo } from "../../Api/youtube";
+import ErrorPage from "../loading/ErrorPage";
 
 const VideoPage = () => {
 
@@ -16,25 +16,23 @@ const VideoPage = () => {
     window.scrollTo(0, 0);
   }, [videoId]);
 
-  const { data: apiData,isError:erroInVideo , isLoading: videoLoading} = useQuery({
+  const { data: apiData, isError: erroInVideo, isLoading: videoLoading } = useQuery({
     queryKey: ["video", videoId],
     queryFn: () => fetchVideo(videoId),
   });
 
-  const { data: channelData, isLoading: channelLoading,isError:erroInChannel } = useQuery({
+  const { data: channelData, isLoading: channelLoading, isError: erroInChannel } = useQuery({
     queryKey: ["channel", apiData?.snippet?.channelId],
     queryFn: () => fetchChannel(apiData),
     enabled: !!apiData,
   });
-console.log(channelData);
-  const { data: commentsData, isLoading: commentsLoading,isError:erroInComments } = useQuery({
+
+  const { data: commentsData, isLoading: commentsLoading, isError: erroInComments } = useQuery({
     queryKey: ["comments", videoId],
     queryFn: () => fetchComments(videoId),
   });
 
-  const actualCategoryId = apiData?.snippet?.categoryId;
- if (videoLoading) return <VideoLoading />;
-
+  if (videoLoading) return <VideoLoading />;
 
   if (erroInVideo || !apiData) {
     return (
@@ -47,14 +45,10 @@ console.log(channelData);
       <ErrorPage title="Something went wrong" message="We couldn't load all the video details right now." />
     );
   }
-  
-  if (erroInComments) return <ErrorPage title="Video not available" message="This video might be private, deleted, or region-restricted." />;
-    if (erroInChannel ) return <ErrorPage title="Video not available" message="This video might be private, deleted, or region-restricted." />;
-      if (erroInVideo) return <ErrorPage title="Video not available" message="This video might be private, deleted, or region-restricted." />;
+
   return (
     <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 px-3 sm:px-7 py-3 sm:py-0">
 
-    
       <div className="w-full lg:flex-[0.68]">
 
         <div className="w-full aspect-video bg-black rounded-xl overflow-hidden">
@@ -89,6 +83,9 @@ console.log(channelData);
                 <img
                   src={channelData?.snippet?.thumbnails?.high?.url}
                   className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = "/user.png";
+                  }}
                 />
 
                 <div className="flex flex-col gap-0.5">
@@ -142,7 +139,7 @@ console.log(channelData);
             {apiData?.snippet?.description?.slice(0, 300)}
           </p>
         </div>
-\
+
         <div className="mt-6 sm:mt-7">
 
           <p className="font-semibold text-xl sm:text-2xl mb-4">
@@ -151,14 +148,13 @@ console.log(channelData);
 
           <div className="flex gap-3 mb-6">
             <img src="/photo.png" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full" />
-            <input 
+            <input
               placeholder="Add a comment..."
               className="flex-1 border-b outline-none pb-2 text-sm sm:text-base"
             />
           </div>
 
           {commentsLoading ? (
-            
             [...Array(4)].map((_, i) => (
               <div key={i} className="flex gap-3 mb-6 animate-pulse">
                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gray-300" />
@@ -171,20 +167,15 @@ console.log(channelData);
             ))
           ) : (
             commentsData?.map((comment) => (
-                console.log(comment.snippet.topLevelComment.snippet.authorProfileImageUrl),
               <div key={comment.id} className="flex gap-3 mb-6">
-             <img
-             className="w-9 h-9 sm:w-10 sm:h-10 rounded-full"
-  src={comment.snippet.topLevelComment.snippet.authorProfileImageUrl}
-  className="w-10 h-10 rounded-full object-cover"
-  
-  onError={(e) => {
-    e.currentTarget.src = "/user.png";
-  }}
-  onLoad={() => console.log("Image Loaded")}
-/>
-                  
-               
+                <img
+                  src={comment.snippet.topLevelComment.snippet.authorProfileImageUrl}
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = "/user.png";
+                  }}
+                />
+
                 <div className="flex flex-col">
                   <span className="font-medium text-base sm:text-lg">
                     {comment.snippet.topLevelComment.snippet.authorDisplayName}{" "}
@@ -209,8 +200,11 @@ console.log(channelData);
 
       </div>
 
-      {actualCategoryId && (
-        <Recommended categoryId={actualCategoryId} />
+      {apiData?.snippet?.channelId && (
+        <Recommended
+          channelId={apiData.snippet.channelId}
+          currentVideoId={videoId}
+        />
       )}
     </div>
   );

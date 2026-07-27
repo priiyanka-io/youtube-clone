@@ -108,7 +108,7 @@ export const fetchPopular= async ({ pageParam,categoryId}) => {
     };
   } catch (error) {
     console.log(error);
-    throw error; // IMPORTANT
+    throw error; 
   }
 };
 
@@ -133,6 +133,31 @@ export const fetchSearch = async ({ query }) => {
     throw error;
   }
 };
+
+
+export const fetchChannelVideos = async ({ channelId, pageParam = "" }) => {
+  try {
+    const uploadsPlaylistId = "UU" + channelId.slice(2);
+
+    const response = await youtube.get("/playlistItems", {
+      params: {
+        part: "snippet",
+        playlistId: uploadsPlaylistId,
+        maxResults: 12,
+        key: API_KEY,
+        pageToken: pageParam,
+      },
+    });
+
+    return {
+      items: response.data.items,
+      nextPageToken: response.data.nextPageToken,
+    };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
 export const fetchChannelAvatar = async (channelId) => {
   if (!channelId) return null;
   const res = await fetch(
@@ -148,8 +173,8 @@ export const fetchShorts = async ({ pageParam = "" }) => {
       params: {
         part: "snippet",
         type: "video",
-        videoDuration: "short",   // YouTube ka built-in filter: <4 min videos
-        q: "shorts",              // extra keyword taaki zyada relevant results aayein
+        videoDuration: "short",  
+        q: "shorts",              
         maxResults: 20,
         regionCode: "IN",
         key: API_KEY,

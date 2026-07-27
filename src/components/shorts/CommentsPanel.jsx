@@ -1,8 +1,8 @@
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
-import { fetchComments } from "../Api/youtube";
+import { fetchComments } from "../../Api/youtube";
 import { useQuery } from "@tanstack/react-query";
-import { timeAgo, formatViews } from "../utils/timeAgo";
+import { timeAgo, formatViews } from "../../utils/timeAgo";
 
 const CommentsPanel = ({ onClose, videoId }) => {
   const { data: rawComments, isLoading, isError } = useQuery({

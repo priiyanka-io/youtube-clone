@@ -2,9 +2,9 @@ import { useState } from "react";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useQuery } from "@tanstack/react-query";
-import { fetchPopular } from "../Api/youtube";
-import ErrorPage from "./ErrorPage";
-import { formatViews, timeAgo } from "../utils/timeAgo";
+import { fetchPopular } from "../../Api/youtube";
+import ErrorPage from "../loading/ErrorPage";
+import { formatViews, timeAgo } from "../../utils/timeAgo";
 import { Link } from "react-router";
 
 const LikedVideos = () => {
@@ -51,14 +51,14 @@ const LikedVideos = () => {
         <h2 className="text-black text-xl font-semibold">Liked Videos</h2>
 
         <div className="flex items-center gap-2 self-end sm:self-auto">
-          <button className="text-black text-sm border border-gray-800 rounded-full px-4 py-1.5 hover:bg-gray-100">
+          <button className="text-black text-sm border border-gray-800 rounded-full! px-4 py-1.5 hover:bg-gray-100">
             View all
           </button>
 
           <button
             onClick={prevSlide}
             disabled={currentIndex === 0}
-            className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-800 disabled:opacity-40"
+            className="w-8 h-8 flex items-center justify-center rounded-full! border border-gray-800 disabled:opacity-40"
           >
             <IoChevronBack size={16} />
           </button>
@@ -66,7 +66,7 @@ const LikedVideos = () => {
           <button
             onClick={nextSlide}
             disabled={currentIndex + 4 >= historyVideos.length}
-            className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-800 disabled:opacity-40"
+            className="w-8 h-8 flex items-center justify-center rounded-full! border border-gray-800 disabled:opacity-40"
           >
             <IoChevronForward size={16} />
           </button>

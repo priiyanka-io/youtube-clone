@@ -1,5 +1,5 @@
 import History from "./History.jsx";
-import LikedVideos from "./LikedVideos";
+import LikedVideos from "./LikedVideos.jsx";
 
 const Profile = () => {
   return (

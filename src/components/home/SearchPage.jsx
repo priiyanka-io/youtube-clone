@@ -2,9 +2,9 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import SearchLoading from "./loading/SearchLoading";
-import { fetchSearchVideos } from "../Api/youtube";
-import ErrorPage from "./ErrorPage";
+import SearchLoading from "../loading/SearchLoading";
+import { fetchSearchVideos } from "../../Api/youtube";
+import ErrorPage from "../loading/ErrorPage";
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();

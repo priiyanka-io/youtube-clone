@@ -10,7 +10,7 @@ import {
   toggleMute,
   toggleLike,
   toggleSubscribe,
-} from "../redux/shortSlice";
+} from "../../redux/shortSlice";
 
 const ShortCard = ({ short, onCommentClick }) => {
   const dispatch = useDispatch();

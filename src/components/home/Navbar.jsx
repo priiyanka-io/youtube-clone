@@ -11,13 +11,13 @@ import { Link } from "react-router";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { fetchSearch } from "../Api/youtube";
+import { fetchSearch } from "../../Api/youtube";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setSearch } from "../redux/navSlice";
-import { setDebouncedSearch } from "../redux/navSlice";
-import { setShowSuggestions } from "../redux/navSlice";
-import { setOpen } from "../redux/drawerSlice";
+import { setSearch } from "../../redux/navSlice";
+import { setDebouncedSearch } from "../../redux/navSlice";
+import { setShowSuggestions } from "../../redux/navSlice";
+import { setOpen } from "../../redux/drawerSlice";
 
 const Navbar = () => {
   const search = useSelector((state) => state.navbar.search);

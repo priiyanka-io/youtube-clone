@@ -9,7 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { IoGameController } from "react-icons/io5";
 import { FaCarSide } from "react-icons/fa6";
 import { FiMenu } from 'react-icons/fi';
-import { setCategory } from "../redux/categorySlice";
+import { setCategory } from "../../redux/categorySlice";
 import { FaTv } from "react-icons/fa";
 import { GrTechnology } from "react-icons/gr";
 import { FaMusic } from "react-icons/fa6";

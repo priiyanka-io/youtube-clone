@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import ShortCard from "./ShortCard";
 import CommentsPanel from "./CommentsPanel";
-import { fetchShorts } from "../Api/youtube";
+import { fetchShorts } from "../../Api/youtube";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import ErrorPage from "./ErrorPage";
+import ErrorPage from "../loading/ErrorPage";
 import { useInView } from "react-intersection-observer";
-import ShortsLoading from "./loading/ShortsLoading";
+import ShortsLoading from "../loading/ShortsLoading";
 
-import {setActiveVideoId, setShowComments,} from "../redux/shortSlice";
+import {setActiveVideoId, setShowComments,} from "../../redux/shortSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Shorts = () => {

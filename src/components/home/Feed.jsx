@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { formatViews, timeAgo } from "../utils/timeAgo";
-import FeedLoading from "./loading/FeedLoading";
-import ErrorPage from "./ErrorPage";
+import { formatViews, timeAgo } from "../../utils/timeAgo";
+import FeedLoading from "../loading/FeedLoading";
+import ErrorPage from "../loading/ErrorPage";
 
 const Feed = ({ videos, isLoading, error, lastRef }) => {
   if (isLoading) return <FeedLoading />;

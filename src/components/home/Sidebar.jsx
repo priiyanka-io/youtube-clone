@@ -33,7 +33,7 @@ const Sidebar = () => {
 
           <NavLink
             style={{ textDecoration: "none" }}
-            to="/"
+            to="/subscription"
             className={() =>
               `w-full py-3 flex flex-col items-center gap-1 text-black no-underline hover:bg-gray-100 `
             }
@@ -74,7 +74,7 @@ const Sidebar = () => {
           <span className="text-[10px] no-underline">Shorts</span>
         </NavLink>
         <NavLink
-          to="/"
+          to="/subscription"
           style={{ textDecoration: "none" }}
           className="flex flex-col items-center gap-0.5 text-black no-underline"
         >
