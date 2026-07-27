@@ -11,6 +11,7 @@ import { useInView } from "react-intersection-observer";
 import SearchPage from "./components/SearchPage";
 import { useSelector } from "react-redux";
 import ErrorPage from "./components/ErrorPage";
+import Profile from "./components/Profile";
 function App() {
 
 const category = useSelector((state) => state.category.value);
@@ -56,6 +57,7 @@ useEffect(() => {
        <Route  path="/video/:videoId" element={<VideoPage category={category}   videos={videos} isLoading={isLoading} error={error}/>}></Route>
            <Route path="search" element={<SearchPage category={category}  />} />
          <Route path="/shorts" element={<Shorts />} />
+         <Route path="/profile" element={<Profile />} />
         <Route
           index
           element={<Feed category={category} lastRef={ref} videos={videos} isLoading={isLoading} error={error}/>}

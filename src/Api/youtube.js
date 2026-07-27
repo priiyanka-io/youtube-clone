@@ -89,13 +89,14 @@ export const fetchSearchVideos = async ({ pageParam,query }) => {
 
 
 export const fetchPopular= async ({ pageParam,categoryId}) => {
+  
   try {
     const response = await youtube.get("/videos", {
   params: {
     part: "snippet,statistics,contentDetails",
     chart: "mostPopular",
     videoCategoryId: categoryId,
-    regionCode: "In",
+    regionCode: "IN",
     maxResults: 20,
     key: API_KEY,
      pageToken: pageParam,
