@@ -132,3 +132,35 @@ export const fetchSearch = async ({ query }) => {
     throw error;
   }
 };
+export const fetchChannelAvatar = async (channelId) => {
+  if (!channelId) return null;
+  const res = await fetch(
+    `${youtube}/channels?part=snippet&id=${channelId}&key=${API_KEY}`
+  );
+  if (!res.ok) return null;
+  const data = await res.json();
+  return data?.items?.[0]?.snippet?.thumbnails?.default?.url ?? null;
+};
+export const fetchShorts = async ({ pageParam = "" }) => {
+  try {
+    const response = await youtube.get("/search", {
+      params: {
+        part: "snippet",
+        type: "video",
+        videoDuration: "short",   // YouTube ka built-in filter: <4 min videos
+        q: "shorts",              // extra keyword taaki zyada relevant results aayein
+        maxResults: 20,
+        regionCode: "IN",
+        key: API_KEY,
+        pageToken: pageParam,
+      },
+    });
+    return {
+      items: response.data.items,
+      nextPageToken: response.data.nextPageToken,
+    };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

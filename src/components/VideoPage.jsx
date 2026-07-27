@@ -54,10 +54,9 @@ console.log(channelData);
   return (
     <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 px-3 sm:px-7 py-3 sm:py-0">
 
-      {/* LEFT */}
+    
       <div className="w-full lg:flex-[0.68]">
 
-        {/* Video */}
         <div className="w-full aspect-video bg-black rounded-xl overflow-hidden">
           <iframe
             className="w-full h-full"
@@ -69,12 +68,10 @@ console.log(channelData);
           ></iframe>
         </div>
 
-        {/* Title */}
         <p className="text-base sm:text-[18px] font-bold mt-2">
           {apiData?.snippet?.title}
         </p>
 
-        {/* Channel */}
         <div className="flex flex-col sm:flex-row justify-between sm:items-center mt-1 gap-3">
 
           <div className="flex items-center gap-3 sm:gap-4">
@@ -137,7 +134,6 @@ console.log(channelData);
 
         </div>
 
-        {/* Description */}
         <div className="bg-gray-100 rounded-xl p-3 sm:p-4 mt-3">
           <p className="font-medium text-sm sm:text-base">
             {formatViews(apiData?.statistics?.viewCount)} • {timeAgo(apiData?.snippet?.publishedAt)}
@@ -146,8 +142,7 @@ console.log(channelData);
             {apiData?.snippet?.description?.slice(0, 300)}
           </p>
         </div>
-
-        {/* Comments */}
+\
         <div className="mt-6 sm:mt-7">
 
           <p className="font-semibold text-xl sm:text-2xl mb-4">

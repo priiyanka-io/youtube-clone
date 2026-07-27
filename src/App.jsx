@@ -6,6 +6,7 @@ import Feed from "./components/Feed";
 import { useInfiniteQuery} from "@tanstack/react-query";
 import { fetchPopularVideos } from "./Api/youtube";
 import VideoPage from "./components/VideoPage";
+import Shorts from "./components/Shorts";
 import { useInView } from "react-intersection-observer";
 import SearchPage from "./components/SearchPage";
 import { useSelector } from "react-redux";
@@ -54,6 +55,7 @@ useEffect(() => {
       <Route path="/" element={<MainLayout  />}>
        <Route  path="/video/:videoId" element={<VideoPage category={category}   videos={videos} isLoading={isLoading} error={error}/>}></Route>
            <Route path="search" element={<SearchPage category={category}  />} />
+         <Route path="/shorts" element={<Shorts />} />
         <Route
           index
           element={<Feed category={category} lastRef={ref} videos={videos} isLoading={isLoading} error={error}/>}

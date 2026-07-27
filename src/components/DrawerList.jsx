@@ -52,8 +52,7 @@ const dispatch =useDispatch()
           {categories.map((item) => (
             <Link to="/"
               onClick={() => {
-                  console.log("Clicked:", item.name);
-  console.log("Category:", item.set);
+            
                   toggleDrawer(false)();
                 dispatch(setCategory(item.set));
               }}

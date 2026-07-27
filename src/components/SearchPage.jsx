@@ -50,7 +50,6 @@ const SearchPage = () => {
           ref={index === videos.length - 1 ? ref : null}
           className="flex flex-col sm:flex-row gap-3 mb-4 sm:mb-2 cursor-pointer w-full"
         >
-          {/* Thumbnail */}
           <div className="w-full sm:w-93 h-52 sm:h-58 shrink-0 overflow-hidden rounded-xl">
             <img
               src={video.snippet.thumbnails.high?.url}
@@ -59,7 +58,6 @@ const SearchPage = () => {
             />
           </div>
 
-          {/* Video Details */}
           <div className="flex flex-col py-1">
             <h4 className="text-base sm:text-lg font-medium leading-6 line-clamp-2 mb-2">
               {video.snippet.title}
