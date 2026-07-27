@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import { useDispatch } from "react-redux";
 import { MdHome } from "react-icons/md";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -15,15 +16,10 @@ import { FaMusic } from "react-icons/fa6";
 import { FaBlog } from "react-icons/fa";
 import { LuNewspaper } from "react-icons/lu";
 import { IoMdBasketball } from "react-icons/io";
+import { Link } from 'react-router';
 
 const DrawerList = ({ toggleDrawer }) => {
-  const subscription = [
-    { name: "KGcoding", src: "/kgcoding.webp" },
-    { name: "Apna College", src: "/shradha.webp" },
-    { name: "Thapa Technical", src: "/thapa.webp" },
-    { name: "CodeWithHarry", src: "/harry.webp" },
-    { name: "chai aur code", src: "/chai.webp" },
-  ]
+
   const categories = [
     { name: "Home", icon: <MdHome />, set: "0" },
     { name: "Gaming", icon: <IoGameController />, set: "20" },
@@ -35,7 +31,7 @@ const DrawerList = ({ toggleDrawer }) => {
     { name: "Blog", icon: <FaBlog />, set: "22" },
     { name: "Newspaper", icon: <LuNewspaper />, set: "25" },
   ];
-
+const dispatch =useDispatch()
   return <>
     <Box sx={{ width: { xs: 220, sm: 250 }, height: "100vh" }}
       className="flex flex-col overflow-hidden" role="presentation">
@@ -54,10 +50,12 @@ const DrawerList = ({ toggleDrawer }) => {
       >
         <List>
           {categories.map((item) => (
-            <div
+            <Link to="/"
               onClick={() => {
-                toggleDrawer(false);
-                setCategory(item.set);
+                  console.log("Clicked:", item.name);
+  console.log("Category:", item.set);
+                  toggleDrawer(false)();
+                dispatch(setCategory(item.set));
               }}
               style={{ textDecoration: "none", color: "black" }}
               key={item.name}
@@ -68,26 +66,16 @@ const DrawerList = ({ toggleDrawer }) => {
                   <ListItemIcon className="text-xl sm:text-2xl text-black">
                     {item.icon}
                   </ListItemIcon>
-
                   <ListItemText primary={item.name} />
                 </ListItemButton>
               </ListItem>
-            </div>
+            </Link>
           ))}
         </List>
         <hr className='font-semibold' />
-        <p className='ml-4 font-semibold text-lg sm:text-xl'>Subscription</p>
+       
 
-        <List>
-          {subscription.map((item) => (
-            <div style={{ textDecoration: "none", color: "black" }} className="text-black decoration-none" key={item.name}>
-              <div className='flex gap-3 ml-4 p-2'>
-                <img className='h-7 w-7 sm:h-8 sm:w-8 rounded-full' src={item.src} />
-                <p className='text-black'>{item.name}</p>
-              </div>
-            </div>
-          ))}
-        </List>
+       
 
       </div>
 

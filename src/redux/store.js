@@ -9,6 +9,5 @@ export const store = configureStore({
     category: categoryReducer,
     drawer: drawerReducer,
     navbar:navReducer,
-    
   },
 });

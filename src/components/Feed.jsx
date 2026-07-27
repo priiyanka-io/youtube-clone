@@ -9,7 +9,6 @@ if (error) return <ErrorPage title="Couldn't load videos" message="Something wen
   const allVideos = videos?.pages?.flatMap((page) => page.items) ?? [];
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-3 sm:px-0">
-
       {allVideos.map((video, index) => (
         <Link to={`/video/${video.id}`}
           style={{ textDecoration: "none", color: "black" }}

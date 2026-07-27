@@ -26,7 +26,7 @@ const VideoPage = () => {
     queryFn: () => fetchChannel(apiData),
     enabled: !!apiData,
   });
-
+console.log(channelData);
   const { data: commentsData, isLoading: commentsLoading,isError:erroInComments } = useQuery({
     queryKey: ["comments", videoId],
     queryFn: () => fetchComments(videoId),
@@ -156,13 +156,14 @@ const VideoPage = () => {
 
           <div className="flex gap-3 mb-6">
             <img src="/photo.png" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full" />
-            <input
+            <input 
               placeholder="Add a comment..."
               className="flex-1 border-b outline-none pb-2 text-sm sm:text-base"
             />
           </div>
 
           {commentsLoading ? (
+            
             [...Array(4)].map((_, i) => (
               <div key={i} className="flex gap-3 mb-6 animate-pulse">
                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gray-300" />
@@ -175,11 +176,20 @@ const VideoPage = () => {
             ))
           ) : (
             commentsData?.map((comment) => (
+                console.log(comment.snippet.topLevelComment.snippet.authorProfileImageUrl),
               <div key={comment.id} className="flex gap-3 mb-6">
-                <img
-                  src={comment.snippet.topLevelComment.snippet.authorProfileImageUrl}
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full"
-                />
+             <img
+             className="w-9 h-9 sm:w-10 sm:h-10 rounded-full"
+  src={comment.snippet.topLevelComment.snippet.authorProfileImageUrl}
+  className="w-10 h-10 rounded-full object-cover"
+  
+  onError={(e) => {
+    e.currentTarget.src = "/user.png";
+  }}
+  onLoad={() => console.log("Image Loaded")}
+/>
+                  
+               
                 <div className="flex flex-col">
                   <span className="font-medium text-base sm:text-lg">
                     {comment.snippet.topLevelComment.snippet.authorDisplayName}{" "}

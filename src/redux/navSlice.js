@@ -18,8 +18,7 @@ const navSlice = createSlice({
     },
     setDebouncedSearch: (state, action) => {
       state.debouncedSearch = action.payload;
-    },
-      
+    },  
   },
 });
 

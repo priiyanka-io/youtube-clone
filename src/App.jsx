@@ -12,7 +12,8 @@ import { useSelector } from "react-redux";
 import ErrorPage from "./components/ErrorPage";
 function App() {
 
-const category = useSelector((state) => state.category.category);
+const category = useSelector((state) => state.category.value);
+
     const { ref, inView } = useInView({
    threshold: 0.1,
   });
